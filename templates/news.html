@@ -1,0 +1,30 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+{% load filter_cencor %}
+
+{% block title %}
+News
+{% endblock title %}
+{% block content %}
+    <h1>Количество всех новостей {{ news|length }}</h1>
+    <hr>
+    {% if news %}
+    <table>
+        <tr>
+            <td><p><strong>Заголовок</strong></p></td>
+            <td><p><strong>Дата публикации</strong></p></td>
+            <td><p><strong>Описание статьи/новости</strong></p></td>
+        </tr>
+        {% for newss in news %}
+        <tr>
+            <td>{{ newss.title|cencor }}</td>
+            <td>{{ newss.data_creations|date:'d m Y'|year }}</td>
+            <td>{{ newss.text|truncatechars:20|cencor }}</td>
+         </tr>
+        {% endfor %}
+    <table/>
+    {% else %}
+    <h2>Новостей нет</h2>
+    {% endif %}
+{% endblock content %}

@@ -5,7 +5,6 @@ from django.db import models
 from django.db.models import Sum
 
 
-
 class Author(models.Model):
     """ Модель Author имеет следующие роля:
     -autor_user связь «один к одному» с встроенной моделью пользователей User,
@@ -103,7 +102,9 @@ class Post(models.Model):
         self.save()
 
     def __str__(self):
-        return f"{self.title} {self.author}"
+        dataf = 'Новость от {}'.format(self.data_creations.strftime('%d.%m.%Y %H:%M'))
+        return f"{dataf}, {self.author}, {self.title}, {self.category_type}, {self.rating}"
+
 
 
 class PostCategory(models.Model):
@@ -151,4 +152,3 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"{self.data_creation}, {self.user_post}"
-
