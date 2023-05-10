@@ -8,6 +8,15 @@ News
 {% endblock title %}
 {% block content %}
     <h1>Количество всех новостей {{ news|length }}</h1>
+    {{ filterset.form.as_p }}
+    <form action="" method="get">
+       <label for="start">Start date:</label>
+       <input type="date" id="start" name="trip-start"
+<!--       value="2023-01-01"-->
+<!--       min="2023-01-01" max="2024-12-31"-->
+
+
+       <input type="submit" value="Найти" />
     <hr>
     {% if news %}
     <table>
@@ -42,4 +51,5 @@ News
            <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
        {% endif %}
    {% endif %}
+
 {% endblock content %}
