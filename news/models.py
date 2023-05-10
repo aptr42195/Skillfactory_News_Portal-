@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import Sum
+from django.urls import reverse
 
 
 class Author(models.Model):
@@ -105,7 +106,8 @@ class Post(models.Model):
         dataf = 'Новость от {}'.format(self.data_creations.strftime('%d.%m.%Y %H:%M'))
         return f"{dataf}, {self.author}, {self.title}, {self.category_type}, {self.rating}"
 
-
+    def get_absolute_url(self):
+        return reverse('post_detail', args=[str(self.id)])
 
 class PostCategory(models.Model):
     """
