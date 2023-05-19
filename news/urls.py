@@ -17,7 +17,6 @@ urlpatterns = [
     path('news/upgrade/', upgrade_me, name='upgrade'),
     # path('categories/<int:pk>', CategoryListView.as_view(), name='category_list'),
     # path('news/login/',LoginView.as_view(template_name = 'sign/login.html')),
-    path('/test/sign/logout/', LogoutView.as_view(template_name = 'sign/logout.html'),name='logout'),
     path('news/login/',
          LoginView.as_view(template_name='sign/login.html'),
          name='login'),
