@@ -14,6 +14,14 @@ from .filtres import PostFilter
 from .forms import PostForm, BaseRegisterForm
 
 from django.shortcuts import render
+<<<<<<< HEAD
+=======
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from .models import Post, Author, Category, Comment
+from .filtres import PostFilter
+from .forms import PostForm
+>>>>>>> 8dc332dc15bc6b6b2a0e0bca3cad4c6cd45214fd
 
 
 # Create your views here.
@@ -40,6 +48,19 @@ class NewsSearch(ListView):
     model = Post
     template_name = 'news_search.html'
     context_object_name = 'search'
+<<<<<<< HEAD
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        self.filterset = PostFilter(self.request.GET, queryset)
+        return self.filterset.qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filterset'] = self.filterset
+        return context
+=======
+>>>>>>> 8dc332dc15bc6b6b2a0e0bca3cad4c6cd45214fd
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -51,13 +72,16 @@ class NewsSearch(ListView):
         context['filterset'] = self.filterset
         return context
 
-
 class PostDetail(DetailView):
     model = Post
     template_name = 'new_s.html'
     context_object_name = 'new_s'
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8dc332dc15bc6b6b2a0e0bca3cad4c6cd45214fd
 class NewsCreate(CreateView):
     form_class = PostForm
     model = Post
@@ -68,8 +92,12 @@ class NewsCreate(CreateView):
         category_type.category_type = 'NW'
         return super().form_valid(form)
 
+<<<<<<< HEAD
 
 class ArticleCreate(LoginRequiredMixin, CreateView, TemplateView):
+=======
+class ArticleCreate(CreateView):
+>>>>>>> 8dc332dc15bc6b6b2a0e0bca3cad4c6cd45214fd
     form_class = PostForm
     model = Post
     template_name = 'articles_edit.html'
@@ -79,12 +107,16 @@ class ArticleCreate(LoginRequiredMixin, CreateView, TemplateView):
         category_type.category_type = 'AR'
         return super().form_valid(form)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8dc332dc15bc6b6b2a0e0bca3cad4c6cd45214fd
 class NewsUpdate(UpdateView):
     form_class = PostForm
     model = Post
     template_name = 'news_edit.html'
 
+<<<<<<< HEAD
 
 
     def form_valid(self, form):
@@ -99,6 +131,13 @@ class NewsUpdate(UpdateView):
         return super().form_valid(form)
 
 
+=======
+    def form_valid(self, form):
+        category_type = form.save(commit=False)
+        category_type.category_type = 'WR'
+        return super().form_valid(form)
+
+>>>>>>> 8dc332dc15bc6b6b2a0e0bca3cad4c6cd45214fd
 class ArticleUpdate(UpdateView):
     form_class = PostForm
     model = Post
@@ -109,12 +148,16 @@ class ArticleUpdate(UpdateView):
         category_type.category_type = 'AR'
         return super().form_valid(form)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8dc332dc15bc6b6b2a0e0bca3cad4c6cd45214fd
 class NewsDelete(DeleteView):
     model = Post
     template_name = 'news_delete.html'
     success_url = reverse_lazy('post_list')
 
+<<<<<<< HEAD
 
 class ArticleDelete(DeleteView):
     model = Post
@@ -143,3 +186,9 @@ def upgrade_me(request):
     if not request.user.groups.filter(name='premium').exists():
         premium_group.user_set.add(user)
     return redirect('/')
+=======
+class ArticleDelete(DeleteView):
+    model = Post
+    template_name = 'articles_delete.html'
+    success_url = reverse_lazy('post_list')
+>>>>>>> 8dc332dc15bc6b6b2a0e0bca3cad4c6cd45214fd

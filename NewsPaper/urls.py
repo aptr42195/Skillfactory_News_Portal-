@@ -22,8 +22,13 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('pages/', include('django.contrib.flatpages.urls')),
+<<<<<<< HEAD
     path('', include('news.urls')),
     path('accounts/', include('allauth.urls')),
 
+=======
+    path('news/', include('news.urls')),
+    path('article/', include('news.urls')),
+>>>>>>> 8dc332dc15bc6b6b2a0e0bca3cad4c6cd45214fd
 
 ]

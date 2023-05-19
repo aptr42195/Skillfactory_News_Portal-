@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.contrib.auth.models import User
 from django_filters import FilterSet, ModelChoiceFilter, DateFilter
 from .models import Post
@@ -15,8 +16,19 @@ class PostFilter(FilterSet):
         label='Дата',
     )
 
+=======
+from django_filters import FilterSet
+from .models import Post
+
+class PostFilter(FilterSet):
+>>>>>>> 8dc332dc15bc6b6b2a0e0bca3cad4c6cd45214fd
     class Meta:
        model = Post
        fields = {
            'title': ['icontains'],
+<<<<<<< HEAD
+=======
+           'author': ['in'],
+           # 'data_creations': ['gt']
+>>>>>>> 8dc332dc15bc6b6b2a0e0bca3cad4c6cd45214fd
        }
