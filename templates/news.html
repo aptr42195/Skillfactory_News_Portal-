@@ -1,0 +1,65 @@
+{% extends 'flatpages/default.html' %}
+
+{% load filter_cencor %}
+
+{% block title %}
+Posts
+{% endblock title %}
+{% block content %}
+    <h3 class="text-center text">Всего новостей на странице: {{ object_list|length }}</h3>
+    {% if news %}
+        <table>
+            <tr>
+                <td><b>Заголовок</b></td>
+                <td><b>Категории</b></td>
+                <td><b>Дата публикации</b></td>
+                <td><b>Публикация</b></td>
+            </tr>
+
+            {% for newss in news %}
+                    <td>
+                        <a href="{% url 'post_detail' newss.id %}"><u>Показать</u></a>
+                        <a href="{% url 'news_edit' newss.id %}"><u> Редактировать </u></a>
+                        <a href="{% url 'news_delete' newss.id %}"><u> Удалить </u></a>
+{##}
+{##}
+{#            <td>{{ newss.title|cencor }}</td>#}
+{#            <td>{{ newss.data_creations|date:'d m Y' }}</td>#}
+{#            <td>{{ newss.text|truncatechars:20|cencor }}</td>#}
+
+        </td>
+            <tr>
+                <td>{{ newss.title|cencor }}</td>
+                <td>
+                    {% for category in newss.post_category.all %}
+                    <a href="{% url 'category_list' category.id %}">{{ category }}</a>
+                    {% endfor %}
+                </td>
+                <td>{{ newss|date:'d M Y' }}</td>
+                <td>{{ newss.text|truncatewords:20|cencor }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <h2>Новостей нет!</h2>
+    {% endif %}
+   {% if page_obj.has_previous %}
+       <a href="?page=1">1</a>
+       {% if page_obj.previous_page_number != 1 %}
+           ...
+           <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+       {% endif %}
+   {% endif %}
+
+   {# Информация о текущей странице #}
+   {{ page_obj.number }}
+
+   {# Информация о следующих страницах #}
+   {% if page_obj.has_next %}
+       <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+       {% if paginator.num_pages != page_obj.next_page_number %}
+           ...
+           <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+       {% endif %}
+   {% endif %}
+{% endblock content %}
